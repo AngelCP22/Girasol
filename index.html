@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ramo de Girasoles</title>
+  <style>
+    body {
+      margin: 0;
+      background: url('https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0') no-repeat center center/cover;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+    .container {
+      position: relative;
+      width: 500px;
+      height: 600px;
+      background-color: rgba(255, 255, 255, 0.8);
+      border-radius: 15px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .bouquet {
+      position: relative;
+      width: 400px;
+      height: 500px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .girasol {
+      position: relative;
+      width: 200px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .flor {
+      width: 180px;
+      height: 180px;
+      position: relative;
+      margin-bottom: -20px;
+    }
+    .centro {
+      width: 95px;
+      height: 95px;
+      background-color: brown;
+      border-radius: 50%;
+      position: absolute;
+      top: 75%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 10;
+    }
+    .petalo {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 40px;
+      height: 90px;
+      background-color: yellow;
+      border-radius: 50%;
+      transform-origin: bottom center;
+      opacity: 0;
+      transition: opacity 0.3s ease-in-out;
+    }
+    .tallo {
+      width: 20px;
+      height: 200px;
+      background-color: green;
+      position: relative;
+    }
+    .hoja {
+      width: 50px;
+      height: 30px;
+      background-color: green;
+      position: absolute;
+      border-radius: 50%;
+    }
+    .hoja.izquierda {
+      left: -40px;
+      top: 80px;
+      transform: rotate(-30deg);
+    }
+    .hoja.derecha {
+      right: -40px;
+      top: 100px;
+      transform: rotate(30deg);
+    }
+    .mensaje {
+      margin-top: 20px;
+      background-color: rgba(255, 255, 255, 0.8);
+      border: 2px solid #ccc;
+      padding: 10px 20px;
+      border-radius: 10px;
+      font-family: sans-serif;
+      font-size: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="bouquet" id="bouquet"></div>
+  </div>
+  <div class="mensaje">No serán girasoles reales, pero florecen con código</div>
+  <script>
+    function crearGirasolAnimado() {
+      let girasol = document.createElement('div');
+      girasol.className = 'girasol';
+      
+      let flor = document.createElement('div');
+      flor.className = 'flor';
+      let centro = document.createElement('div');
+      centro.className = 'centro';
+      
+      flor.appendChild(centro);
+      
+      let tallo = document.createElement('div');
+      tallo.className = 'tallo';
+      let hojaIzq = document.createElement('div');
+      hojaIzq.className = 'hoja izquierda';
+      let hojaDer = document.createElement('div');
+      hojaDer.className = 'hoja derecha';
+      tallo.appendChild(hojaIzq);
+      tallo.appendChild(hojaDer);
+      
+      girasol.appendChild(flor);
+      girasol.appendChild(tallo);
+      document.getElementById('bouquet').appendChild(girasol);
+      
+      setTimeout(() => {
+        for (let i = 0; i < 12; i++) {
+          let petalo = document.createElement('div');
+          petalo.className = 'petalo';
+          petalo.style.transform = `translate(-50%, -60%) rotate(${i * 30}deg) translateY(-40px)`;
+          flor.appendChild(petalo);
+          
+          setTimeout(() => {
+            petalo.style.opacity = '1';
+          }, i * 150);
+        }
+      }, 500);
+    }
+    
+    crearGirasolAnimado();
+  </script>
+</body>
+</html>
